@@ -1,10 +1,12 @@
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from "react";
 
 export default function useAuth(shouldRedirect) {
     const { data: session } = useSession();
     const router = useRouter();
+    const pathname = usePathname();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useEffect(() => {
@@ -12,14 +14,16 @@ export default function useAuth(shouldRedirect) {
             signOut({ callbackUrl: '/auth/login', redirect: shouldRedirect });
         }
 
+        console.log(pathname);
+
         if (session === null) {
-            if (router.route !== '/auth/login') {
-                router.replace('/auth/login');
+            if (pathname !== '/auth/login') {
+                router.push('/auth/login');
             }
             setIsAuthenticated(false);
         } else if (session !== undefined) {
-            if (router.route === '/auth/login') {
-                router.replace('/');
+            if (pathname === '/auth/login') {
+                router.push('/application');
             }
             setIsAuthenticated(true);
         }

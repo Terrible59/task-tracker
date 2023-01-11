@@ -4,8 +4,10 @@ import { signIn, signOut } from 'next-auth/react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import useAuth from "../../../hooks/useAuth";
 function Login() {
     const { data: session, status } = useSession();
+    const isAuthenticated = useAuth(true);
     const router = useRouter();
     return <section className="login">
         <h1 className="login__header">Войти</h1>
@@ -28,7 +30,7 @@ function Login() {
                 }, 400);
                 const result = await signIn('credentials', {redirect: false, ...values});
                 if (result.status === 200) {
-                    router.replace('/');
+                    router.push('/application');
                 }
             }}
         >

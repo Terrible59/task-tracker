@@ -13,7 +13,9 @@ export default function RootLayout({ children }) {
           <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet"/>
       </head>
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+            {children}
+        </Providers>
       </body>
     </html>
   );

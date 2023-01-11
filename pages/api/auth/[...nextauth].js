@@ -45,6 +45,9 @@ const providers = [
             } catch (e) {
                 throw new Error(e);
             }
+        },
+        pages: {
+            signIn: '/auth/login'
         }
     })
 ]
