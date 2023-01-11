@@ -55,3 +55,95 @@ body {
         margin-top: 15px;
     }
 }
+
+.content-wrapper {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    padding: 50px;
+}
+
+.content {
+    height: 70vh;
+}
+
+.app-bar {
+    flex-basis: 20%;
+    max-width: 20%;
+    flex-shrink: 0;
+    margin-right: 30px;
+    &__item {
+        &_active {
+            & a {
+                background-color: rgb(225, 238, 252);
+                color: rgb(73, 148, 236);
+            }
+        }
+    }
+    &__link {
+        display: block;
+        color: rgb(73, 148, 236);
+        text-decoration: none;
+        padding: 10px 15px;
+        background-color: transparent;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        &_active, &:hover {
+            background-color: rgb(225, 238, 252);
+            color: rgb(73, 148, 236);
+        }
+    }
+}
+
+.todo-list {
+    &__heading {
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 30px;
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+}
+
+.todo-title {
+    font-size: 17px;
+    color: #212121;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.todo-check {
+    border: 1px solid rgba(175, 176, 176, 0.5);
+    background-color: #fff;
+    border-radius: 5px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    transition: 0.3s;
+    user-select: none;
+    position: relative;
+    &:hover{
+        cursor: pointer;
+    }
+    &__img{
+        display: block;
+        width: 100%;
+    }
+}
+
+.todo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    &_done .todo-check {
+        background-color: $blue;
+        border-color: $blue;
+    }
+    &_done .todo-title {
+        text-decoration: line-through;
+        color: rgba(215, 216, 216, 1);
+    }
+}

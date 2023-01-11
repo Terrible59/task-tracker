@@ -13,9 +13,12 @@ export default function TodoList() {
         };
         fetch();
     }, []);
-    return <div className="todo-list">
-        {data
-            ? data?.map((item, i) => <Todo key={i} props={item} />)
-            : ""}
+    return <div className="todo-list-wrapper">
+        <div className="todo-list__heading">Задачи</div>
+        <div className="todo-list">
+            {data
+                ? data?.map((item, i) => <Todo key={i} props={item} />)
+                : ""}
+        </div>
     </div>
 }

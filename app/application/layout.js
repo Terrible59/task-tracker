@@ -5,9 +5,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function RootLayout({ children }) {
     return (
-        <div>
+        <div className="content-wrapper">
             <AppBar/>
-            {children}
+            <div className="content">
+                {children}
+            </div>
         </div>
     );
 }
