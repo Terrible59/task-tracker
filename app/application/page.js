@@ -1,10 +1,13 @@
 'use client';
 import React from "react";
 import useAuth from "../../hooks/useAuth";
+import TodoList from "../../components/TodoList";
 
 function Home() {
     const isAuth = useAuth(true);
-    return <div>I am home</div>
+    return <div>
+        <TodoList/>
+    </div>
 }
 
 export default Home;
