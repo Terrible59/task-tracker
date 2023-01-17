@@ -4,8 +4,8 @@ body {
 }
 
 .add-btn {
-    width: 45px;
-    height: 45px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     background-color: $blue;
     display: flex;
@@ -36,13 +36,14 @@ body {
     }
 }
 
-.login {
+.auth {
     width: 100%;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
+    column-gap: 100px;
     &__header {
         font-size: 30px;
         font-weight: bold;
@@ -196,7 +197,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    padding-right: 50px;
 }
 
 
@@ -227,6 +229,8 @@ body {
     align-items: center;
     text-align: center;
     margin-right: 10px;
+    text-decoration: none;
+    color: #000;
     &__title{
         font-size: 11px;
         line-height: 12px;
@@ -239,4 +243,23 @@ body {
     &__icon{
         font-size: 24px;
     }
+    &_page {
+        flex-direction: row;
+        width: 100%;
+        margin-bottom: 30px;
+        & .project-item__title {
+            margin-left: 20px;
+            font-size: 20px;
+            margin-top: 0;
+        }
+    }
+}
+
+.todo-lists-wrapper {
+    display: flex;
+}
+
+.todo-list-card {
+    flex-basis: 32%;
+    max-width: 32%;
 }

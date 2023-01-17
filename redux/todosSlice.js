@@ -1,6 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 import changeTodo from "../api/todos/changeTodo";
 
+import isToday from '../utils/isToday';
+import isTomorrow from "../utils/isTomorrow";
+import isLater from "../utils/isLater";
+
 export const todosSlice = createSlice({
     name: 'todos',
     initialState: {
@@ -23,13 +27,21 @@ export const todosSlice = createSlice({
             const todoIndex = state.todos.findIndex((el) => el.id === action.payload.id);
             state.todos[todoIndex] = action.payload;
         },
-        addNewTodoAction: (state) => {
+        addNewTodoAction: (state, action) => {
+            let date = new Date();
+
+            if (action && action.payload.days) {
+                date.setDate(date.getDate() + action.payload.days);
+            }
+
             state.todos.push({
                 id: self.crypto.randomUUID(),
                 title: "",
                 done: false,
                 journal: false,
                 isNew: true,
+                project_id: action?.payload.project_id ? action.payload.project_id : null,
+                date: date.toISOString(),
             });
         }
     }
@@ -51,5 +63,25 @@ export const selectors = {
             if (todo.project_id === projectId) return res += 1;
             return res;
         }, 0);
+    },
+    todosByProject: function(state, projectId) {
+        return state.todos.todos.filter((todo) => {
+            if (todo.project_id === projectId) return todo;
+        });
+    },
+    todayTodos: function (state) {
+        return state.todos.todos.filter((todo) => {
+            return isToday(new Date(todo.date));
+        });
+    },
+    tomorrowTodos: function (state) {
+        return state.todos.todos.filter((todo) => {
+            return isTomorrow(new Date(todo.date));
+        });
+    },
+    laterTodos: function (state) {
+        return state.todos.todos.filter((todo) => {
+            return isLater(new Date(todo.date));
+        });
     }
 }

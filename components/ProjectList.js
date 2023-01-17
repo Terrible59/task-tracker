@@ -9,8 +9,6 @@ export default function ProjectList() {
     const data = useSelector(state => state.projects.projects);
     const dispatch = useDispatch();
 
-    console.log(data);
-
     useEffect(() => {
         const fetch = async () => {
             const res = await getProjects();

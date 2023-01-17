@@ -2,9 +2,10 @@ import React from "react";
 import Image from 'next/image';
 import check from '../public/check-white.svg';
 import changeTodo from "../api/todos/changeTodo";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {checkTodoAction, changeTodoAction} from "../redux/todosSlice";
 import createTodo from "../api/todos/createTodo";
+import {projectSelectors} from "../redux/projectsSlice";
 
 export default function Todo({ todo }) {
     const dispatch = useDispatch();
@@ -28,6 +29,7 @@ export default function Todo({ todo }) {
     }
 
     async function handleBlur() {
+        if (!todo.title) return;
         if (todo.isNew) {
             await createTodo(todo);
             const changedTodo = {...todo};
@@ -39,8 +41,10 @@ export default function Todo({ todo }) {
         await changeTodo(todo);
     }
 
+    const color = useSelector(state => projectSelectors.getColorById(state, todo.project_id));
+
     return <div className={"todo" + (todo.done ? " todo_done" : "")}>
-        <div className="todo-check" onClick={handleDoneClick}><Image src={check} alt="check" className="todo-check__img"/></div>
+        <div className="todo-check" style={color && todo.done ? {backgroundColor: color, borderColor: color} : null} onClick={handleDoneClick}><Image src={check} alt="check" className="todo-check__img"/></div>
         {todo.journal ?
             <div className="todo-title">{todo?.title}</div>
             :

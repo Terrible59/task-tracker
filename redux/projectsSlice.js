@@ -15,3 +15,15 @@ export const projectsSlice = createSlice({
 export const { setProjectsAction } = projectsSlice.actions
 
 export default projectsSlice.reducer
+
+export const projectSelectors = {
+    getColorById: (state, id) => {
+        try {
+            const res = state.projects.projects.find(el => el.id === id).color;
+            return res;
+        } catch (e) {}
+    },
+    getById: (state, id) => {
+        return state.projects.projects.find(el => el.id === id);
+    }
+}

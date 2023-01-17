@@ -14,8 +14,6 @@ export default function useAuth(shouldRedirect) {
             signOut({ callbackUrl: '/auth/login', redirect: shouldRedirect });
         }
 
-        console.log(pathname);
-
         if (session === null) {
             if (pathname !== '/auth/login') {
                 router.push('/auth/login');

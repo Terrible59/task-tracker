@@ -16,9 +16,6 @@ export default function AppBar() {
                 <Link className="app-bar__link" href="/application/archive"><MdArchive/> Архив</Link>
             </div>
             <div className="app-bar__item">
-                <Link className="app-bar__link" href="/"><MdFace/> Дети</Link>
-            </div>
-            <div className="app-bar__item">
                 <button onClick={() => signOut()} className="btn btn-danger">Выйти</button>
             </div>
         </div>
