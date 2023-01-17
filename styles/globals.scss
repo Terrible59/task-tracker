@@ -3,6 +3,39 @@ body {
     font-family: "Inter";
 }
 
+.add-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: $blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 0 10px rgba($blue, .5);
+    &:hover {
+        cursor: pointer;
+    }
+    &::before, &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        box-shadow: 0 0 3px rgba(255,255,255,.2);
+    }
+    &::before {
+        width: 1px;
+        height: 30%;
+    }
+    &::after {
+        height: 1px;
+        width: 30%;
+    }
+}
+
 .login {
     width: 100%;
     height: 100vh;
@@ -65,6 +98,7 @@ body {
 
 .content {
     height: 70vh;
+    flex-grow: 1;
 }
 
 .app-bar {
@@ -81,7 +115,8 @@ body {
         }
     }
     &__link {
-        display: block;
+        display: flex;
+        align-items: center;
         color: rgb(73, 148, 236);
         text-decoration: none;
         padding: 10px 15px;
@@ -92,6 +127,9 @@ body {
             background-color: rgb(225, 238, 252);
             color: rgb(73, 148, 236);
         }
+        & svg {
+            margin-right: 10px;
+        }
     }
 }
 
@@ -101,7 +139,7 @@ body {
         font-weight: bold;
         font-size: 30px;
         margin-top: 0;
-        margin-bottom: 20px;
+        margin-bottom: 0;
     }
 }
 
@@ -110,6 +148,12 @@ body {
     color: #212121;
     text-decoration: none;
     transition: 0.3s;
+    margin-top: 0px;
+    border: none;
+    padding: 0;
+    &:focus {
+        outline: none;
+    }
 }
 
 .todo-check {
@@ -145,5 +189,54 @@ body {
     &_done .todo-title {
         text-decoration: line-through;
         color: rgba(215, 216, 216, 1);
+    }
+}
+
+.todo-heading-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+
+.project-item-info{
+    width: 63px;
+    height: 63px;
+    border-radius: 50%;
+    background-color: $blue;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+
+.project-list{
+    display: flex;
+    align-items: center;
+    transform: translateX(-5px);
+    margin-bottom: 15px;
+}
+
+.project-item{
+    width: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-right: 10px;
+    &__title{
+        font-size: 11px;
+        line-height: 12px;
+        margin-top: 5px;
+    }
+    &__tasks{
+        font-size: 11px;
+        margin-top: 5px;
+    }
+    &__icon{
+        font-size: 24px;
     }
 }
