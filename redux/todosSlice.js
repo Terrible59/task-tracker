@@ -43,11 +43,14 @@ export const todosSlice = createSlice({
                 project_id: action?.payload.project_id ? action.payload.project_id : null,
                 date: date.toISOString(),
             });
+        },
+        deleteTodoAction: (state, action) => {
+            state.todos = state.todos.filter(el => el.id !== action.payload.id);
         }
     }
 })
 
-export const { setTodosAction, checkTodoAction, changeTodoAction, setArchiveTodosAction, addNewTodoAction } = todosSlice.actions
+export const { setTodosAction, checkTodoAction, changeTodoAction, setArchiveTodosAction, addNewTodoAction, deleteTodoAction } = todosSlice.actions
 
 export default todosSlice.reducer
 

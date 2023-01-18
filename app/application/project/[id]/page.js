@@ -1,5 +1,5 @@
 'use client';
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {addNewTodoAction, selectors, setTodosAction} from "../../../../redux/todosSlice";
 import TodoList from "../../../../components/TodoList";
@@ -7,8 +7,15 @@ import hexToRGB from "../../../../utils/hexToRgba";
 import {projectSelectors, setProjectsAction} from "../../../../redux/projectsSlice";
 import getProjects from "../../../../api/projects/getProjects";
 import getTodos from "../../../../api/todos/getTodos";
+import EditProjectPopup from "../../../../components/EditProjectPopup";
+import useAuth from "../../../../hooks/useAuth";
 
 export default function ProjectPage({ params }) {
+    const isAuth = useAuth(true);
+    const [show, setShow] = useState(false);
+    const handleOpen = () => setShow(true);
+    const handleClose = () => setShow(false);
+
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -42,6 +49,7 @@ export default function ProjectPage({ params }) {
                     <div className="project-item__tasks">{doneCount}/{todosCount}</div>
                 </div>
                 <div className="project-item__title">{project.title}</div>
+                <div className="project-item__edit" onClick={handleOpen}><i className="material-icons">edit</i></div>
             </div>
             <div className="project-todos">
                 <div className="todo-heading-wrapper">
@@ -50,6 +58,7 @@ export default function ProjectPage({ params }) {
                 </div>
                 <TodoList todos={todos} />
             </div>
+            <EditProjectPopup show={show} onHide={handleClose} project={project} />
         </div>
     );
 }

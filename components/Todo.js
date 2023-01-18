@@ -3,9 +3,10 @@ import Image from 'next/image';
 import check from '../public/check-white.svg';
 import changeTodo from "../api/todos/changeTodo";
 import {useDispatch, useSelector} from "react-redux";
-import {checkTodoAction, changeTodoAction} from "../redux/todosSlice";
+import {checkTodoAction, changeTodoAction, deleteTodoAction} from "../redux/todosSlice";
 import createTodo from "../api/todos/createTodo";
 import {projectSelectors} from "../redux/projectsSlice";
+import deleteTodo from "../api/todos/deleteTodo";
 
 export default function Todo({ todo }) {
     const dispatch = useDispatch();
@@ -41,6 +42,11 @@ export default function Todo({ todo }) {
         await changeTodo(todo);
     }
 
+    async function handleDelete() {
+        dispatch(deleteTodoAction(todo));
+        if (!todo.isNew) await deleteTodo(todo);
+    }
+
     const color = useSelector(state => projectSelectors.getColorById(state, todo.project_id));
 
     return <div className={"todo" + (todo.done ? " todo_done" : "")}>
@@ -50,5 +56,6 @@ export default function Todo({ todo }) {
             :
             <input className="todo-title" value={todo?.title} onChange={handleTitleChange} onKeyDown={handleKeyDown} onBlur={handleBlur} />
         }
+        <div className="todo-delete" onClick={handleDelete}><i className="material-icons">delete</i></div>
     </div>
 }
