@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import changeTodo from "../api/todos/changeTodo";
+import crypto from 'crypto';
 
 import isToday from '../utils/isToday';
 import isTomorrow from "../utils/isTomorrow";
@@ -34,7 +34,7 @@ export const todosSlice = createSlice({
             }
 
             state.todos.push({
-                id: self.crypto.randomUUID(),
+                id: typeof window !== 'undefined' ? window.crypto.randomUUID() : crypto.randomUUID(),
                 title: "",
                 done: false,
                 journal: false,
