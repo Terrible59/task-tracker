@@ -21,7 +21,6 @@ export const todosSlice = createSlice({
         checkTodoAction: (state, action) => {
             const todoIndex = state.todos.findIndex((el) => el.id === action.payload.id);
             state.todos[todoIndex].done = !state.todos[todoIndex].done;
-            changeTodo(state.todos[todoIndex]);
         },
         changeTodoAction: (state, action) => {
             const todoIndex = state.todos.findIndex((el) => el.id === action.payload.id);

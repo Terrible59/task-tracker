@@ -298,7 +298,10 @@ body {
 
 .project-item_edit {
     margin: 20px auto 0;
-
+    position: relative;
+    &:hover {
+        cursor: pointer;
+    }
     & .project-item__title {
         margin-top: 10px;
         padding: 0;
@@ -333,3 +336,24 @@ body {
     }
 }
 
+.icon-picker {
+    display: none;
+    flex-wrap: wrap;
+    width: 300px;
+    height: 200px;
+    overflow: scroll;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .05);
+    margin: 0 auto;
+    margin-top: 15px;
+    &_show {
+        display: flex;
+    }
+    &__item {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

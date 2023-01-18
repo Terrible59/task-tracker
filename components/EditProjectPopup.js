@@ -1,15 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import hexToRGB from "../utils/hexToRgba";
 import {useDispatch} from "react-redux";
 import {changeProjectAction, deleteProjectAction} from "../redux/projectsSlice";
 import ColorPicker from "./ColorPicker";
+import IconPicker from "./IconPicker";
 import changeProject from "../api/projects/changeProject";
 import createProject from "../api/projects/createProject";
 import deleteProject from "../api/projects/deleteProject";
 import {useRouter} from "next/navigation";
 export default function EditProjectPopup({show, onHide, project}) {
+    const [showIconPicker, setShowIconPicker] = useState(false);
+
     const dispatch = useDispatch();
     const router = useRouter();
     function handleChange(event) {
@@ -36,6 +39,10 @@ export default function EditProjectPopup({show, onHide, project}) {
         router.push('/application');
     }
 
+    function handleIconClick() {
+        setShowIconPicker(!showIconPicker);
+    }
+
     return (
         <Modal
             show={show}
@@ -50,13 +57,14 @@ export default function EditProjectPopup({show, onHide, project}) {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <div className="project-item project-item_edit">
+                <div className="project-item project-item_edit" onClick={handleIconClick}>
                     <div className="project-item-info" style={{background: "linear-gradient(135deg, " + hexToRGB(project.color) + " 0%, " + hexToRGB(project.color, 0.6) + " 100%)"}}>
                         <i className="material-icons project-item__icon">{project.icon}</i>
                         <div className="project-item__tasks"><i className="material-icons" style={{fontSize: "12px"}}>edit</i></div>
                     </div>
                     <input className="project-item__title" value={project.title} onChange={handleChange} />
                 </div>
+                <IconPicker show={showIconPicker} project={project}/>
                 <ColorPicker project={project}/>
             </Modal.Body>
             <Modal.Footer>

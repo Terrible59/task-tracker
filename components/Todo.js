@@ -15,6 +15,7 @@ export default function Todo({ todo }) {
         const changedTodo = {...todo};
         changedTodo.done = !todo.done;
         dispatch(checkTodoAction(todo));
+        await changeTodo(changedTodo);
     }
 
     function handleTitleChange(event) {
